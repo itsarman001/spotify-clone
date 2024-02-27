@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+
+    <!-- Page Title -->
+    <title>Potify</title>
+
+    <!-- icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- css -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="wrapper">
+    <aside class="overflowYscroll">
+        <section class="home overflowYscroll">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <i class="ri-netease-cloud-music-line"></i>
+                <span>Potify</span>
+            </a>
+
+            <!-- Home tabs -->
+            <ul class="tabs-wrapper">
+                <li class="home-tabs">
+                    <a href="#home" class="home-links">
+                        <i class="ri-home-3-line"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="home-tabs">
+                    <a href="#search" class="home-links">
+                        <i class="ri-search-line"></i>
+                        <span>Search</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        <section class="library overflowYscroll">
+            <div class="library-tab">
+                <div>
+                    <i class="ri-folder-music-fill"></i>
+                    <span>Your Library</span>
+                </div>
+                <i class="ri-add-line"></i>
+            </div>
+        </section>
+    </aside>
+
+    <main class="overflowYscroll">
+        <nav>
+            <div class="arrow-btns">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#ffffff" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M13.5 16C13.5 16 10.5 13.054 10.5 12C10.5 10.9459 13.5 8 13.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#ffffff" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+                    <path d="M10.5 8C10.5 8 13.5 10.946 13.5 12C13.5 13.0541 10.5 16 10.5 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+
+            <div class="signup-and-login-btns">
+                <button class="signup">Sign Up</button>
+                <button class="login">Log In</button>
+            </div>
+        </nav>
+
+        <section class="home-library">
+            <div class="cards">
+                <div class="cover">
+                    <img src="./assets/album_covers/Jazzy Morning.jpg" alt="Cover">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Jazzy Morning</h4>
+                    <p class="card-description">Start your day right and wake up with some calm and cool Jazz.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
