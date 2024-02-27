@@ -1,6 +1,7 @@
 :root {
-    --dark: #222831;
-    --gray: #393E46;
+    --black: #000000;
+    --dark: #222222;
+    --dark-secondary: #212A3E;
     --light: #EEEEEE;
     --accent: #00ADB5;
 }
@@ -9,6 +10,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border-radius: 1rem;
 }
 
 html,
@@ -17,7 +19,7 @@ body {
     width: 100vw;
     font-family: "Poppins", sans-serif;
     overflow: hidden;
-    background-color: var(--dark);
+    background-color: var(--black);
     color: var(--light);
 
     & ul {
@@ -32,29 +34,14 @@ body {
 
 .wrapper {
     display: flex;
-    padding: 1rem;
+    padding: .6rem;
     gap: .5rem;
 }
 
 /* utitlity */
-.flex {
-    display: flex;
-}
-
-.items-center {
-    align-items: center;
-}
-
-.justify-content {
-    justify-content: space-between;
-}
 
 .overflowYscroll::-webkit-scrollbar {
     display: none;
-}
-
-.border {
-    border: 2px solid var(--accent);
 }
 
 /* Main and Aside Sizing */
@@ -65,6 +52,7 @@ aside {
 
 main {
     width: 75vw;
+    position: relative;
 }
 
 aside {
@@ -72,17 +60,21 @@ aside {
 }
 
 /* Aside */
-main,
 .home,
 .library {
     overflow-y: scroll;
-    background-color: var(--gray);
-    padding: 1rem;
+    background-color: var(--dark);
     color: inherit;
-    border: 2px solid var(--accent);
 }
 
 /* Aside Navigation */
+
+.home,
+.library,
+.home-library,
+.footer {
+    padding: 1rem;
+}
 
 .home {
     min-height: 25%;
@@ -108,8 +100,9 @@ main,
 /* Aside Playlist */
 
 .library {
-    min-height: calc(75% - .8rem);
-    height: calc(75% - .8rem);
+    min-height: calc(50% - .8rem);
+    height: calc(50% - .8rem);
+    margin-bottom: .8rem;
     cursor: pointer;
 }
 
@@ -120,18 +113,49 @@ main,
     font-size: 1.2rem;
 }
 
+.footer {
+    min-height: calc(25% - .8rem);
+    background-color: var(--dark);
+    font-size: .8rem;
+}
+
+.footer ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.footer ul li {
+    background-color: var(--dark-secondary);
+    columns: var(--light);
+    padding: .2rem .5rem;
+}
+
 /* Main */
+main {
+    background-color: var(--dark);
+}
 
 /* Navbar */
 nav {
+    height: 4rem;
+    width: 100%;
+    padding: 0 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: var(--dark-secondary);
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 99;
+
 }
 
 .arrow-btns svg {
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
 }
 
 .signup-and-login-btns button {
@@ -154,31 +178,105 @@ nav {
 }
 
 .login:hover {
+    margin-left: .5rem;
     background-color: var(--accent);
     color: var(--light);
+    transform: scale(1.1);
 }
 
 .signup:hover {
+    margin-right: .5rem;
     background-color: var(--dark);
     color: var(--light);
+    transform: scale(1.1);
+}
+
+/* Main Content */
+
+.main-contents {
+    height: 90vh;
+    min-height: calc(100vh - 1.2rem);
+    padding: 4rem 1rem 0;
+    overflow-y: scroll;
+    background: rgb(80, 80, 80);
+    background: linear-gradient(0deg, rgba(80, 80, 80, 1) 11%, rgba(33, 42, 62, 1) 100%);
 }
 
 /* Main Library */
+.home-library {
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.library-cards-wrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    overflow-y: scroll;
+}
+
+.library-cards-wrapper::-webkit-scrollbar { display: none; }
+
+.library-header { margin-bottom: .7rem; }
+
 /* Cards */
 .cards {
-    height: 19rem;
+    height: 20rem;
     width: 16rem;
     background-color: var(--dark);
-    padding: .5rem;
+    padding: 1rem .5rem;
+    flex-shrink: 0;
 }
 
 .cover {
-    height: 14rem;
-    width: 15rem;
+    height: 70%;
+    width: calc(100% - .5rem);
+    margin: 0 auto;
+    position: relative;
 }
 
 .cover img {
     height: 100%;
     width: 100%;
-    background-size: contain;
+    background-size: cover;
+}
+
+.cards:hover { background-color: var(--dark-secondary); }
+
+.cover svg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 3rem;
+    width: 3rem;
+    opacity: 0;
+    transition: all ease .5s;
+}
+
+.cards:hover .cover svg {
+    opacity: 1;
+    margin: 0 1rem 1rem 0;
+}
+
+.card-body {
+    height: 30%;
+    width: calc(100% - .5rem);
+    margin: .7rem auto;
+    font-size: .9rem;
+}
+
+.main-footer,
+.social-link-wrapper {
+    padding: 1rem 1.5rem;
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.social-link-wrapper {
+    width: 20%;
+    gap: 1rem;
 }
