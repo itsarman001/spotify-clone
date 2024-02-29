@@ -206,6 +206,7 @@ nav {
 .home-library {
     max-height: 100%;
     overflow: hidden;
+    position: relative;
 }
 
 .library-cards-wrapper {
@@ -266,6 +267,8 @@ nav {
     font-size: .9rem;
 }
 
+.main-footer { margin-bottom: 4rem;}
+
 .main-footer,
 .social-link-wrapper {
     padding: 1rem 1.5rem;
@@ -279,4 +282,28 @@ nav {
 .social-link-wrapper {
     width: 20%;
     gap: 1rem;
+}
+
+.playbar {
+    height: 3.5rem;
+    width: 100%;
+    background-color: var(--dark);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    & .pauseBtn { display: none;}
+}
+
+.controls span {
+    margin: 0 1rem; 
+}
+
+.controls span svg {
+    height: 2rem;
+    width: 2rem;
 }
