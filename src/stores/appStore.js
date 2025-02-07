@@ -1,48 +1,37 @@
 import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useSpotifyStore = defineStore('spotify', {
   state: () => ({
-    isAuthenticated: false,
-    user: null,
-    currentTrack: null,
-    isPlaying: false,
-    playlists: [],
+    user: ref(localStorage.getItem('user') || {}),
+    token: ref(localStorage.getItem('authToken') || null),
+    isAuthenticated: !!this.token.value,
   }),
 
   actions: {
     setUser(user) {
       this.user = user
       this.isAuthenticated = true
+      localStorage.setItem('user', JSON.stringify(user))
     },
+
+    setToken(token) {
+      this.token = token
+      this.isAuthenticated = true
+      localStorage.setItem('authToken', token)
+    },
+
     logout() {
       this.user = null
+      this.token = null
       this.isAuthenticated = false
-    },
-    setCurrentTrack(track) {
-      this.currentTrack = track
-      this.isPlaying = true
-    },
-    togglePlay() {
-      this.isPlaying = !this.isPlaying
-    },
-    setPlaylists(playlists) {
-      this.playlists = playlists
+      localStorage.removeItem('user')
+      localStorage.removeItem('authToken')
     },
   },
 
   getters: {
     isLoggedIn: (state) => state.isAuthenticated,
-
-    currentTrackName: (state) => state.currentTrack?.name || 'No Track Playing',
-
-    currentArtist: (state) => state.currentTrack?.artist || 'Unknown Artist',
-
-    isTrackPlaying: (state) => !!state.currentTrack && state.isPlaying,
-
-    totalPlaylists: (state) => state.playlists.length,
-
-    firstPlaylist: (state) => (state.playlists.length > 0 ? state.playlists[0] : null),
-
-    playlistNames: (state) => state.playlists.map((playlist) => playlist.name),
+    getUser: (state) => state.user,
   },
 })
