@@ -1,5 +1,16 @@
 <script setup>
+import { onMounted } from 'vue';
+import useAuth from '@/composables/useAuth';
 
+const { storeAuthToken } = useAuth();
+
+onMounted(() => {
+  const token = new URLSearchParams(window.location.hash.replace('#', '?')).get('access_token');
+  if (token) {
+    storeAuthToken();
+    window.location.href = '/';
+  }
+});
 </script>
 
 <template>
