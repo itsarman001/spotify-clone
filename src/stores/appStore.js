@@ -1,11 +1,10 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
 
 export const useSpotifyStore = defineStore('spotify', {
   state: () => ({
-    user: ref(localStorage.getItem('user') || {}),
-    token: ref(localStorage.getItem('authToken') || null),
-    isAuthenticated: !!this.token.value,
+    user: JSON.parse(localStorage.getItem('user')) || {},
+    token: localStorage.getItem('authToken'),
+    isAuthenticated: !!localStorage.getItem('authToken'),
   }),
 
   actions: {
@@ -22,7 +21,7 @@ export const useSpotifyStore = defineStore('spotify', {
     },
 
     logout() {
-      this.user = null
+      this.user = {}
       this.token = null
       this.isAuthenticated = false
       localStorage.removeItem('user')
