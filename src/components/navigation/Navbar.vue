@@ -1,6 +1,7 @@
 <script setup>
-import { useSpotifyStore } from '@/stores/appStore'
 import { RouterLink, useRouter } from 'vue-router'
+import { useSpotifyStore } from '@/stores/spotifyStore'
+import useAuth from '@/composables/useAuth'
 
 import HomeIcon from '@/components/icons/HomeIcon.vue'
 import SpotifyLogo from '@/components/icons/SpotifyLogo.vue'
@@ -10,6 +11,7 @@ import UserDropdown from '@/components/ui/UserDropdown.vue'
 
 const spotifyStore = useSpotifyStore()
 const router = useRouter()
+const { authUrl } = useAuth()
 
 const handleLogout = () => {
   spotifyStore.logout()
@@ -34,14 +36,10 @@ const navigateToProfile = () => router.push('/profile')
     </div>
     <div>
       <template v-if="spotifyStore.isLoggedIn">
-        <UserDropdown
-          @navigateToProfile="navigateToProfile"
-          @logout="handleLogout"
-          :user="spotifyStore.user"
-        />
+        <UserDropdown @navigateToProfile="navigateToProfile" @logout="handleLogout" />
       </template>
       <template v-else>
-        <RouterLink to="/login"><BaseButton variant="flat" label="Login" /></RouterLink>
+        <BaseButton @click="authUrl" variant="flat" label="Login" />
       </template>
     </div>
   </nav>

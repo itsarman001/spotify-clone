@@ -1,14 +1,10 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
 import DefaultUser from '@/components/icons/DefaultUser.vue'
+import { useSpotifyStore } from '@/stores/spotifyStore'
+const spotifyStore = useSpotifyStore()
 
-defineProps({
-  user: {
-    type: Object,
-    default: () => ({}),
-    required: true,
-  },
-})
+const user = spotifyStore.getUser
+console.log('Current User is: ', user)
 
 const emit = defineEmits(['navigateToProfile', 'logout'])
 </script>
