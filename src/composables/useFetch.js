@@ -1,23 +1,29 @@
 import { ref } from 'vue'
-import { useSpotifyStore } from '@/stores/spotifyStore'
 import axios from 'axios'
+import { useSpotifyStore } from '@/stores/spotifyStore'
 
 function useFetch() {
   const spotifyStore = useSpotifyStore()
   const accessToken = spotifyStore.token
 
-  const data = ref({})
+  const data = ref(null)
   const isLoading = ref(false)
   const error = ref(null)
 
-  const fn = async (query = '') => {
+  const fetchData = async (query = '') => {
     if (!accessToken) {
       console.log('Access Token Not Available')
-      return
+      return {
+        data: null,
+        isLoading: false,
+        error: 'Access Token Not Available',
+      }
     }
 
     try {
       isLoading.value = true
+      error.value = null
+      data.value = null
       const response = await axios.get(`https://api.spotify.com/v1/${query}`, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
@@ -25,15 +31,22 @@ function useFetch() {
       })
 
       data.value = response.data
+      console.log(data)
     } catch (err) {
       error.value = err.message || err
-      console.log('Error while using useFetch: ', error.value)
+      console.error('Error while using useFetch: ', error.value)
     } finally {
       isLoading.value = false
     }
+
+    return {
+      data: data.value,
+      isLoading: isLoading.value,
+      error: error.value,
+    }
   }
 
-  return { data, isLoading, error, fn }
+  return fetchData
 }
 
 export default useFetch

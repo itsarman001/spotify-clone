@@ -1,14 +1,20 @@
 <script setup>
 import useFetch from '@/composables/useFetch'
 import Navbar from '@/components/navigation/Navbar.vue'
-
 import { useSpotifyStore } from '@/stores/spotifyStore'
+import { onBeforeMount } from 'vue'
+
 const spotifyStore = useSpotifyStore()
 
-const { data: userData, fn: fetchUser } = useFetch()
+const fetchUser = useFetch()
 
-fetchUser('me')
-spotifyStore.setUser(userData)
+onBeforeMount(async () => {
+  const { data, isLoading, error } = await fetchUser('me')
+
+  if (!isLoading && !error.value) {
+    spotifyStore.setUser(data.value)
+  }
+})
 </script>
 
 <template>
